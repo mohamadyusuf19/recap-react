@@ -1,25 +1,28 @@
 import React, { Component } from "react";
+import { isEmpty } from 'lodash';
 import List from "./container/List";
 import Form from "./container/Form";
+import { getData, postData } from "./services/crud";
 
 export default class App extends Component {
   constructor() {
     super();
     this.state = {
-      data: [
-        {
-          email: "yusuf@gmail.com"
-        },
-        {
-          email: "frontend@gmail.com"
-        },
-        {
-          email: "react@gmail.com"
-        }
-      ]
+      email: "",
+      data: []
     };
     this.onChangeText = this.onChangeText.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+  }
+
+  componentDidMount() {
+    this.fetchData();
+  }
+
+  fetchData() {
+    return getData()
+      .then(res => this.setState({ data: res.data }))
+      .catch(err => console.log(err));
   }
 
   onChangeText(e) {
@@ -30,15 +33,17 @@ export default class App extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    const { email, data } = this.state;
-    if (email === undefined || email === "") {
+    const { email } = this.state;
+    if (isEmpty(email)) {
       alert("Email kosong");
     } else {
-      data.push({ email });
-      this.setState({
-        data,
-        email: ""
-      });
+      alert("Email ada");
+      // return postData(email)
+      //   .then(() => {
+      //     this.setState({ email: "" });
+      //     this.fetchData();
+      //   })
+      //   .catch(err => console.log(err));
     }
   }
 
@@ -49,7 +54,7 @@ export default class App extends Component {
         <List data={this.state.data} />
         <Form
           onChange={this.onChangeText}
-          value={email}
+          // value={email}
           onSubmit={this.onSubmit}
         />
       </>

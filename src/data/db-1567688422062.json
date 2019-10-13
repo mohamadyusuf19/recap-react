@@ -1,0 +1,16 @@
+{
+  "data": [
+    {
+      "email": "yusufadinata@gmail.com",
+      "password": 123456
+    },
+    {
+      "email": "musa@gmail.com",
+      "password": 312445
+    },
+    {
+      "email": "arifadinata@gmail.com",
+      "password": 938213
+    }
+  ]
+}

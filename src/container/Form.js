@@ -6,7 +6,7 @@ class FormContainer extends Component {
     return (
       <Form onSubmit={this.props.onSubmit}>
         <Input
-          type="email"
+          type="text"
           name="email"
           onChange={this.props.onChange}
           value={this.props.value}
